@@ -1,18 +1,31 @@
 package com.ciruman.model;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.List;
+
 public class MindMapNode {
 
-    ObservableList<MindMapNode> childs = FXCollections.observableArrayList();
+    private final StringProperty text = new SimpleStringProperty();
+    private final ObservableList<MindMapNode> childs = FXCollections.observableArrayList();
 
-    public ObservableList<MindMapNode> getChilds() {
-        return childs;
+    public MindMapNode(String text) {
+        this.text.set(text);
     }
 
-    public void setChilds(ObservableList<MindMapNode> childs) {
-        this.childs = childs;
+    public String getText() {
+        return text.get();
+    }
+
+    public StringProperty textProperty() {
+        return text;
+    }
+
+    public void addChilds(MindMapNode... childs) {
+        this.childs.addAll(childs);
     }
 
     public ObservableList<MindMapNode> childsProperty(){

@@ -1,15 +1,14 @@
 package com.ciruman;
 
+import com.ciruman.model.MindMapNode;
+import com.ciruman.ui.MindMapNodeManager;
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -37,9 +36,13 @@ public class MayaFx extends Application {
         return canvas;
     }
 
-    private Label createRootNode() {
-        Label rootNode = new Label("Start here!");
-        rootNode.getStyleClass().add("node");
-        return rootNode;
+    private Node createRootNode() {
+        MindMapNode mindMapNode = new MindMapNode("Start here!");
+        MindMapNode mindMapNode1 = new MindMapNode("Children 1");
+        MindMapNode mindMapNode2 = new MindMapNode("Children 2");
+        mindMapNode2.addChilds(new MindMapNode("Children"));
+        mindMapNode.addChilds(mindMapNode1, mindMapNode2);
+        MindMapNodeManager mindMapNodeManager = new MindMapNodeManager(mindMapNode);
+        return mindMapNodeManager.getUI();
     }
 }
