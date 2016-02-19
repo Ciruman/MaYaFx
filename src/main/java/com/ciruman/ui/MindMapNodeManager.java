@@ -1,9 +1,10 @@
 package com.ciruman.ui;
 
+import com.ciruman.calculations.Angle;
 import com.ciruman.model.MindMapNode;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.ObjectBinding;
-import javafx.beans.property.ObjectProperty;
+import javafx.collections.ObservableList;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 
@@ -13,55 +14,54 @@ import java.util.function.Consumer;
 public class MindMapNodeManager {
 
     private final MindMapNode mindMapNode;
+    private Angle angle;
     private MindMapUINode mindMapUINode;
 
-    public MindMapNodeManager(MindMapNode mindMapNode){
+    public MindMapNodeManager(MindMapNode mindMapNode, Angle angle) {
         this.mindMapNode = mindMapNode;
+        this.angle = angle;
         initSubNodes();
     }
 
     private void initSubNodes() {
-        mindMapNode.childsProperty().forEach(new Consumer<MindMapNode>() {
+        mindMapNode.leftChildsProperty().forEach(new Consumer<MindMapNode>() {
             @Override
             public void accept(MindMapNode node) {
-                MindMapNodeManager mindMapNodeManager = new MindMapNodeManager(node);
-                getOrInitializeMindMapUINode().addNode(mindMapNodeManager.getUI(), createPoint2DProperty(mindMapNode.childsProperty().indexOf(node)));
+                MindMapNodeManager mindMapNodeManager = new MindMapNodeManager(node, angle);
+                getOrInitializeMindMapUINode().addNode(mindMapNodeManager.getUI(), createPoint2DProperty(node, mindMapNode.leftChildsProperty()));
+            }
+        });
+        mindMapNode.rightChildsProperty().forEach(new Consumer<MindMapNode>() {
+            @Override
+            public void accept(MindMapNode node) {
+                MindMapNodeManager mindMapNodeManager = new MindMapNodeManager(node, angle);
+                getOrInitializeMindMapUINode().addNode(mindMapNodeManager.getUI(), createPoint2DProperty(node, mindMapNode.rightChildsProperty()));
             }
         });
     }
 
-    public Node getUI(){
+    public Node getUI() {
         MindMapUINode mindMapUINode = getOrInitializeMindMapUINode();
         return mindMapUINode.getUI();
     }
 
     private MindMapUINode getOrInitializeMindMapUINode() {
-        if(mindMapUINode==null) {
+        if (mindMapUINode == null) {
             mindMapUINode = new MindMapUINode();
             mindMapUINode.setText(mindMapNode.getText());
         }
         return mindMapUINode;
     }
 
-    private ObjectBinding<Point2D> createPoint2DProperty(final int i) {
+    private ObjectBinding<Point2D> createPoint2DProperty(final MindMapNode node, final ObservableList<MindMapNode> childs) {
         return Bindings.createObjectBinding(new Callable<Point2D>() {
             @Override
             public Point2D call() throws Exception {
-                double angle = calculateAngle((i+1.0)/(mindMapNode.childsProperty().size()+1.0));
-                return getPosition(new Point2D(40,0), 90, angle);
+                int numberOfNodesInTheSameDirection = childs.size();
+                int indexInTheSameDirection = childs.indexOf(node);
+                return angle.calculatePosition(indexInTheSameDirection, (int) numberOfNodesInTheSameDirection, node.getMindMapNodeDirection());
             }
-        }, mindMapNode.childsProperty());
-    }
-
-    private double calculateAngle(double position) {
-        return (180.0*position)-90;
-    }
-
-    private Point2D getPosition(Point2D center, double radius, double angle) {
-        double x = center.getX() + radius * Math.cos(Math.toRadians(angle));
-        double y = center.getY() + radius * Math.sin(Math.toRadians(angle));
-        Point2D p = new Point2D(x, y);
-        return p;
+        }, childs);
     }
 
 }
