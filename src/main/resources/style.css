@@ -1,0 +1,10 @@
+.node{
+    -fx-text-fill: lightslategray;
+    -fx-background-color: lightgrey;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 5;
+}
+.background{
+ -fx-background-color: white;
+}
