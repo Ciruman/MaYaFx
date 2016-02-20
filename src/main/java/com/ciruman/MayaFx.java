@@ -53,6 +53,6 @@ public class MayaFx extends Application {
         mindMapNode1.addChilds(new MindMapNode("Sub-Children 1-1"));
         mindMapNode1.addChilds(new MindMapNode("Sub-Children 1-2"));
         MindMapNodeManager mindMapNodeManager = new MindMapNodeManager(mindMapNodeRoot, new Angle());
-        return mindMapNodeManager.getUI();
+        return mindMapNodeManager.getNode();
     }
 }

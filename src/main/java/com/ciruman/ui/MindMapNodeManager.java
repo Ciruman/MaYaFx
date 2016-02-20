@@ -28,19 +28,19 @@ public class MindMapNodeManager {
             @Override
             public void accept(MindMapNode node) {
                 MindMapNodeManager mindMapNodeManager = new MindMapNodeManager(node, angle);
-                getOrInitializeMindMapUINode().addNode(mindMapNodeManager.getUI(), createPoint2DProperty(node, mindMapNode.leftChildsProperty()));
+                getOrInitializeMindMapUINode().addNode(mindMapNodeManager.getNode(), createPoint2DProperty(node, mindMapNode.leftChildsProperty()));
             }
         });
         mindMapNode.rightChildsProperty().forEach(new Consumer<MindMapNode>() {
             @Override
             public void accept(MindMapNode node) {
                 MindMapNodeManager mindMapNodeManager = new MindMapNodeManager(node, angle);
-                getOrInitializeMindMapUINode().addNode(mindMapNodeManager.getUI(), createPoint2DProperty(node, mindMapNode.rightChildsProperty()));
+                getOrInitializeMindMapUINode().addNode(mindMapNodeManager.getNode(), createPoint2DProperty(node, mindMapNode.rightChildsProperty()));
             }
         });
     }
 
-    public Node getUI() {
+    public Node getNode() {
         MindMapUINode mindMapUINode = getOrInitializeMindMapUINode();
         return mindMapUINode.getUI();
     }
