@@ -40,18 +40,19 @@ public class MayaFx extends Application {
 
     private Node createRootNode() {
         MindMapNode mindMapNodeRoot = new MindMapNode("Start here!");
-        MindMapNode mindMapNode1 = new MindMapNode("Children 1");
-        MindMapNode mindMapNode2 = new MindMapNode("Children 2");
-        MindMapNode mindMapNode3 = new MindMapNode("Children 3");
-        MindMapNode mindMapNode4 = new MindMapNode("Children 4");
-        MindMapNode mindMapNode5 = new MindMapNode("Children 5");
+//        MindMapNode mindMapNode1 = new MindMapNode("Children 1");
+//        MindMapNode mindMapNode2 = new MindMapNode("Children 2");
+//        MindMapNode mindMapNode3 = new MindMapNode("Children 3");
+//        MindMapNode mindMapNode4 = new MindMapNode("Children 4");
+//        MindMapNode mindMapNode5 = new MindMapNode("Children 5");
         mindMapNodeRoot.setMindMapNodeDirection(MindMapNodeDirection.BOTH);
-        mindMapNodeRoot.addChilds(mindMapNode1, mindMapNode2, mindMapNode3, mindMapNode4, mindMapNode5);
-        mindMapNode2.addChilds(new MindMapNode("Sub-Children 2-1"));
-        mindMapNode2.addChilds(new MindMapNode("Sub-Children 2-2"));
-        mindMapNode2.addChilds(new MindMapNode("Sub-Children 2-3"));
-        mindMapNode1.addChilds(new MindMapNode("Sub-Children 1-1"));
-        mindMapNode1.addChilds(new MindMapNode("Sub-Children 1-2"));
+        mindMapNodeRoot.setLevel(0);
+//        mindMapNodeRoot.addChilds(mindMapNode1, mindMapNode2, mindMapNode3, mindMapNode4, mindMapNode5);
+//        mindMapNode2.addChilds(new MindMapNode("Sub-Children 2-1"));
+//        mindMapNode2.addChilds(new MindMapNode("Sub-Children 2-2"));
+//        mindMapNode2.addChilds(new MindMapNode("Sub-Children 2-3"));
+//        mindMapNode1.addChilds(new MindMapNode("Sub-Children 1-1"));
+//        mindMapNode1.addChilds(new MindMapNode("Sub-Children 1-2"));
         MindMapNodeManager mindMapNodeManager = new MindMapNodeManager(mindMapNodeRoot, new Angle());
         return mindMapNodeManager.getNode();
     }

@@ -1,4 +1,39 @@
-.node{
+.node-root{
+    -fx-text-fill: lightslategray;
+    -fx-background-color: lightgrey;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 5;
+}
+.node-0-1{
+    -fx-text-fill: darkolivegreen;
+    -fx-background-color: greenyellow;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 5;
+}
+.node-0-2{
+     -fx-text-fill: darkolivegreen;
+     -fx-background-color: lightgreen;
+     -fx-border-radius: 5;
+     -fx-background-radius: 5;
+     -fx-padding: 5;
+ }
+.node-0-3{
+     -fx-text-fill: darkolivegreen;
+     -fx-background-color: palegreen;
+     -fx-border-radius: 5;
+     -fx-background-radius: 5;
+     -fx-padding: 5;
+ }
+.node-2{
+    -fx-text-fill: lightslategray;
+    -fx-background-color: lightgrey;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 5;
+}
+.node-3{
     -fx-text-fill: lightslategray;
     -fx-background-color: lightgrey;
     -fx-border-radius: 5;

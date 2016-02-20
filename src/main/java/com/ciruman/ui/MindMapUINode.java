@@ -1,12 +1,15 @@
 package com.ciruman.ui;
 
+import com.ciruman.model.MindMapNode;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.ObjectBinding;
 import javafx.beans.property.ObjectProperty;
+import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 
 import java.util.concurrent.Callable;
 
@@ -16,7 +19,6 @@ public class MindMapUINode {
     private Group root = new Group(label);
 
     public MindMapUINode() {
-        label.getStyleClass().add("node");
         label.translateXProperty().bind(Bindings.createDoubleBinding(new Callable<Double>() {
             @Override
             public Double call() throws Exception {
@@ -29,6 +31,10 @@ public class MindMapUINode {
                 return -(label.getLayoutBounds().getHeight()/2.0);
             }
         },label.layoutBoundsProperty()));
+    }
+
+    public void setOnAction(EventHandler<MouseEvent> onAction){
+        label.setOnMouseClicked(onAction);
     }
 
     public Node getUI(){
@@ -87,4 +93,10 @@ public class MindMapUINode {
         return mindMapNodeConnector;
     }
 
+    public void setStyling(int level, int mainBranch) {
+        if(mainBranch==MindMapNode.ROOT_NODE){
+            label.getStyleClass().add("node-root");
+        }
+        label.getStyleClass().add("node-"+mainBranch+"-"+level);
+    }
 }

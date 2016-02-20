@@ -1,5 +1,7 @@
 package com.ciruman.model;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
@@ -7,10 +9,14 @@ import javafx.collections.ObservableList;
 
 public class MindMapNode {
 
+    public static final int ROOT_NODE = Integer.MIN_VALUE;
     private final StringProperty text = new SimpleStringProperty();
     private final ObservableList<MindMapNode> leftChilds = FXCollections.observableArrayList();
     private final ObservableList<MindMapNode> rightChilds = FXCollections.observableArrayList();
     private MindMapNodeDirection mindMapNodeDirection;
+
+    private final IntegerProperty level = new SimpleIntegerProperty(0);
+    private final IntegerProperty mainBranch = new SimpleIntegerProperty(ROOT_NODE);
 
     public MindMapNode(String text) {
         this.text.set(text);
@@ -73,6 +79,31 @@ public class MindMapNode {
 
     public void setMindMapNodeDirection(MindMapNodeDirection mindMapNodeDirection) {
         this.mindMapNodeDirection = mindMapNodeDirection;
+    }
+
+    public int getLevel() {
+        return level.get();
+    }
+
+    public IntegerProperty levelProperty() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level.set(level);
+    }
+
+
+    public int getMainBranch() {
+        return mainBranch.get();
+    }
+
+    public IntegerProperty mainBranchProperty() {
+        return mainBranch;
+    }
+
+    public void setMainBranch(int mainBranch) {
+        this.mainBranch.set(mainBranch);
     }
 
     @Override
