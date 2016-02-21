@@ -98,7 +98,7 @@ public class MindMapNodeManager {
             public Point2D call() throws Exception {
                 int numberOfNodesInTheSameDirection = childs.size();
                 int indexInTheSameDirection = childs.indexOf(node);
-                return angle.calculatePosition(indexInTheSameDirection, (int) numberOfNodesInTheSameDirection, node.getMindMapNodeDirection());
+                return angle.calculatePosition(indexInTheSameDirection, numberOfNodesInTheSameDirection, node.getMindMapNodeDirection(), node.getLevel());
             }
         }, childs);
     }

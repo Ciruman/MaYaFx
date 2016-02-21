@@ -4,6 +4,7 @@
     -fx-border-radius: 5;
     -fx-background-radius: 5;
     -fx-padding: 5;
+    -fx-font-size: 12pt;
 }
 .node-0-1{
     -fx-text-fill: darkolivegreen;
@@ -11,6 +12,7 @@
     -fx-border-radius: 5;
     -fx-background-radius: 5;
     -fx-padding: 5;
+    -fx-font-size: 10pt;
 }
 .node-0-2{
      -fx-text-fill: darkolivegreen;
@@ -18,6 +20,7 @@
      -fx-border-radius: 5;
      -fx-background-radius: 5;
      -fx-padding: 5;
+    -fx-font-size: 8pt;
  }
 .node-0-3{
      -fx-text-fill: darkolivegreen;
@@ -25,20 +28,39 @@
      -fx-border-radius: 5;
      -fx-background-radius: 5;
      -fx-padding: 5;
+    -fx-font-size: 8pt;
  }
-.node-2{
-    -fx-text-fill: lightslategray;
-    -fx-background-color: lightgrey;
+.node-1-1{
+    -fx-text-fill: brown;
+    -fx-background-color: gold;
     -fx-border-radius: 5;
     -fx-background-radius: 5;
     -fx-padding: 5;
+    -fx-font-size: 10pt;
 }
-.node-3{
-    -fx-text-fill: lightslategray;
-    -fx-background-color: lightgrey;
+.node-1-2{
+    -fx-text-fill: brown;
+    -fx-background-color: khaki;
     -fx-border-radius: 5;
     -fx-background-radius: 5;
     -fx-padding: 5;
+    -fx-font-size: 8pt;
+}
+.node-2-1{
+    -fx-text-fill: firebrick;
+    -fx-background-color: tomato;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 5;
+    -fx-font-size: 10pt;
+}
+.node-2-2{
+    -fx-text-fill: firebrick;
+    -fx-background-color: moccasin;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 5;
+    -fx-font-size: 8pt;
 }
 .background{
  -fx-background-color: white;

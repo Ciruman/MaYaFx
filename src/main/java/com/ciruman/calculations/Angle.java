@@ -7,22 +7,22 @@ import java.util.logging.Logger;
 
 public class Angle {
 
-    public static final int RADIUS = 200;
-    public static final int ANGLE_OFFSET = 90;
-    public static final int X_OFFSET = 40;
+    public static final double RADIUS = 200;
+    public static final double ANGLE_OFFSET = 90;
+    public static final double UNSIGNED_X_OFFSET = 0;
     Logger logger = Logger.getLogger(Angle.class.getName());
 
-    public Point2D calculatePosition(int indexOfNode, int numberOfNodes, MindMapNodeDirection mindMapNodeDirection){
+    public Point2D calculatePosition(int indexOfNode, int numberOfNodes, MindMapNodeDirection mindMapNodeDirection, int level){
         logger.info("Calculating position for index: "+indexOfNode+", number of nodes: "+numberOfNodes+", direction: "+mindMapNodeDirection);
         double angle = calculateAngle((indexOfNode+1.0)/(numberOfNodes+1.0), mindMapNodeDirection);
-        return getPosition(new Point2D(fixValueWithDirection(X_OFFSET, mindMapNodeDirection),0), RADIUS, angle);
+        return getPosition(new Point2D(fixValueWithDirection(UNSIGNED_X_OFFSET, mindMapNodeDirection),0), (RADIUS*(10.0-(level))/10.0), angle);
     }
 
     private double calculateAngle(double position, MindMapNodeDirection mindMapNodeDirection){
             return (180.0 * position) - fixValueWithDirection(ANGLE_OFFSET, mindMapNodeDirection);
     }
 
-    private int fixValueWithDirection(int value, MindMapNodeDirection mindMapNodeDirection){
+    private double fixValueWithDirection(double value, MindMapNodeDirection mindMapNodeDirection){
         return MindMapNodeDirection.RIGHT==mindMapNodeDirection?value:-value;
     }
 
