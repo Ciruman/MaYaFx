@@ -2,6 +2,7 @@ package com.ciruman.ui;
 
 import com.ciruman.calculations.Angle;
 import com.ciruman.model.MindMapNode;
+import com.ciruman.model.MindMapNodeDirection;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.ObjectBinding;
 import javafx.collections.ListChangeListener;
@@ -68,7 +69,7 @@ public class MindMapNodeManager {
         getOrInitializeMindMapUINode().setOnAction(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if(event.getClickCount()>1) {
+                if(event.getClickCount()==1) {
                     MindMapNode newMindMapNode = new MindMapNode("Hola mundo");
                     newMindMapNode.setLevel(mindMapNode.getLevel()+1);
                     newMindMapNode.setMainBranch(calculateMainBranch());
@@ -98,9 +99,19 @@ public class MindMapNodeManager {
             public Point2D call() throws Exception {
                 int numberOfNodesInTheSameDirection = childs.size();
                 int indexInTheSameDirection = childs.indexOf(node);
-                return angle.calculatePosition(indexInTheSameDirection, numberOfNodesInTheSameDirection, node.getMindMapNodeDirection(), node.getLevel());
+                double angleOffsetWithParent = getAngleOffsetWithParent(node)-90;
+                return angle.calculatePosition(indexInTheSameDirection, numberOfNodesInTheSameDirection, node.getMindMapNodeDirection(), node.getLevel(), angleOffsetWithParent);
             }
-        }, childs);
+        }, childs, getOrInitializeMindMapUINode().getUI().layoutXProperty(), getOrInitializeMindMapUINode().getUI().layoutYProperty());
+    }
+
+    private double getAngleOffsetWithParent(MindMapNode node) {
+        if(mindMapNode.isRoot()){
+            return node.getMindMapNodeDirection()== MindMapNodeDirection.RIGHT?0:180;
+        }
+        double layoutX = getOrInitializeMindMapUINode().getUI().getLayoutX();
+        double layoutY = getOrInitializeMindMapUINode().getUI().getLayoutY();
+        return angle.calculateAngle(new Point2D(layoutX, layoutY));
     }
 
     public int calculateMainBranch() {

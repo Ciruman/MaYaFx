@@ -10,12 +10,13 @@ import javafx.collections.ObservableList;
 public class MindMapNode {
 
     public static final int ROOT_NODE = Integer.MIN_VALUE;
+    public static final int ROOT_LEVEL = 0;
     private final StringProperty text = new SimpleStringProperty();
     private final ObservableList<MindMapNode> leftChilds = FXCollections.observableArrayList();
     private final ObservableList<MindMapNode> rightChilds = FXCollections.observableArrayList();
     private MindMapNodeDirection mindMapNodeDirection;
 
-    private final IntegerProperty level = new SimpleIntegerProperty(0);
+    private final IntegerProperty level = new SimpleIntegerProperty(ROOT_LEVEL);
     private final IntegerProperty mainBranch = new SimpleIntegerProperty(ROOT_NODE);
 
     public MindMapNode(String text) {
@@ -83,6 +84,10 @@ public class MindMapNode {
 
     public int getLevel() {
         return level.get();
+    }
+
+    public boolean isRoot(){
+        return level.get()==ROOT_LEVEL;
     }
 
     public IntegerProperty levelProperty() {
